@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
 import time
+import json
 
 class bcolors:
     HEADER = '\033[95m'
@@ -13,39 +14,45 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-current_appointment = datetime.strptime('2022-09-15', '%Y-%m-%d')
+current_appointment = datetime.strptime('2023-12-01', '%Y-%m-%d')
 
 cookies = {
-    '_ga': 'GA1.2.1697804321.1652268137',
-    '_gid': 'GA1.2.1671280518.1652268137',
-    '_yatri_session': 'K0U2VHhsZVNhSitnN3Rmd1lWWUpCSDZhMVZaRSthVHBma0E5cUVCa1VhRFhxOHhPR29UWWs0TnpCdVpPd3FvOFRBZSs5SHg2YWF2RkR4V2pmdWk5dXQyL1luTWxVRC82cVhNekFBVzZrcnB2cmszYXYvU1BXb2RZMjhnaEwvYkJiaTJabTJHUFNGdllMbWdsd21HYTdENzdFSHkzWHlKWjcyZmJRMG5OMzk2ZlVkSjV2dEJDa0hQdFpwbmNnYnB4NjdNelhTSGNFalhudjFMRGRiaDdLdjJtdGh5b2QzVzRxaTUxN3JwTzRmdTljVUhNRDlDc1JubExZZlE1dEpaMExMMnBKNURUK2R1eWRxSlpmRSs4L0hOck1BSDh1SGZyYVdDc3FndU9HNVN1UUVVM1ZiT1MrNVBYT1gxL2VOUXU5MHhEZ09ROGFKTC9BL1JMNlNFTjNWbHV0UTMxd1VreUZTWWozSUV2cUY1N215SnhuK1lMM2tnMDV6N2JabFMwNDFwWG9kQTBqb2U2MHoyeTQ1anBQQ0VnNjhoSEhxVm15T0lQUEtoVEUwWFVyTXFBK29kcXN4MzVZaDRmUy8vYnZhaXlETFRwbHhzQ05ENHMyM3oxTm5uZzdiUytpR1Jkd3VlN0dUNDZnRWVFQml2Ty8rTkNnOE00QW9pVnFnSTU5Z21DY3Z1VlBlREg2ZU9pK2g2OFdNK3ZxV2UvUDlXdThBdE5wOXhENEl3PS0tamk5T2JxNTJscElDU3hWWXBxbjhlZz09--813a2aa8e427067ce4cd49b0e861cd3f841469a0',
+    '_ga': 'GA1.2.1136866613.1686784309',
+    '_gid': 'GA1.2.1139931980.1686784309',
+    '_gat': '1',
+    '_yatri_session': 'ZDBTNnF2dnJqcTVNRVJqM3NjZnNRb0NjNm1QcHZOTU5heExESWdZTVUrMDJDWmlXckV1aVk1MnZlRGpSUTJOQkdkQXlFRFJVOHQ2bFlnT25Wa0tFZFhEczlsd1Y3Y21aR1Rlcm5ONEFVZGRBdm0wZFZId3IyUVZnR241WUtUeDhld3BuNytkeTN0bFFDYXBMRVZIK0s5WWwwU250UEJpdjVHYU1wczRYN1RVZG04Q3Z6N0loOUFrbWRCaUgxcEJ4RmZBblVSUzZYNm5MQUlKeDZHYVVqU2NLVXlUdlFpQ2k5cTdSYy9LTDhtaFNTUVlOa1JBUnpabTNJbmZ5WU5vTTZHWDNNZEhid25DcDl5Mk83TG1zell4Z1VGNy90VWZicnpDVmJYZjF2L0Y4T21DM2VQWk9EaE1SdkVpdmh0djQzVWlvZEJUR0RoblIvbHQ0RjBCL0YwQnBQaC95cktwc01hd3BzN3NVQnNOVFpKVS8zTUF3KzBqT0hneFpaSFJYMFppS3htdDh3NmJERytoUXJUNUNyNVVtemFSTlFRWHBvOVZFb0wyOWp1aVdmNmpZUXQ2ZXVBTWRmZjZ1S0pTK1FSN1dyN0lhN2FVLy9paFVXdTRCS2dJWU5lcXpJNjlwQStSTDJKTWR4bUNQbVhIekorRWRsY0JFTmUzRlc5RGtsQzhLcjJ0RlJKYVVBUThhR1d6K0pwNHVPOGZObDBieW11OUNWMWFYdC9jPS0tbWdHd1NuNzNORHk0UGY1QktHajJwQT09--3f6c7e8c00b0753df8a76004ad4c6e8b583723a7',
 }
 
 headers = {
-    'Connection': 'keep-alive',
-    'sec-ch-ua': '"Google Chrome";v="95", "Chromium";v="95", ";Not A Brand";v="99"',
     'Accept': 'application/json, text/javascript, */*; q=0.01',
-    'X-CSRF-Token': 'eiDaUWITHb3PQ5EWnYmHwB86t5qvAt/3LhKBICtLb2MvNvb4Ph4ry2d1Mi5vL0dJMr/nCVUSyE2JM2wV4ca97A==',
-    'sec-ch-ua-mobile': '?0',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
-    'X-Requested-With': 'XMLHttpRequest',
-    'sec-ch-ua-platform': '"Linux"',
-    'Sec-Fetch-Site': 'same-origin',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Dest': 'empty',
-    'Referer': 'https://ais.usvisa-info.com/es-ar/niv/schedule/38923059/appointment',
+    'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'en-US,en;q=0.9,es-AR;q=0.8,es;q=0.7',
+    'Connection': 'keep-alive',
+    'Host': 'ais.usvisa-info.com',
+    'If-None-Match': 'W/"8376c608a41bf791cfc2c2bd5faf21ca"',
+    'Referer': 'https://ais.usvisa-info.com/es-ar/niv/schedule/38923059/appointment',
+    'sec-ch-ua': '"Google Chrome";v="108", "Chromium";v="108", ";Not A Brand";v="8"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Linux"',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+    'X-CSRF-Token': 'XphOK5t5jys8mh8/XBfsmcDpljsrR4YdJVTQc94w4p5eJcdahzufdpJq3XkYD3o9OsURF+wjldcN1geIcj6GMw==',
+    'X-Requested-With': 'XMLHttpRequest',
 }
-
-# response = requests.get('https://ais.usvisa-info.com/es-ar/niv/schedule/38923059/appointment/days/28.json?appointments\\[expedite\\]=false', cookies=cookies, headers=headers)
-# print(response.json())
 
 found = 'NOTHING FOUND'
 
 while True:
     now = datetime.now().strftime('%H:%M:%S %d/%m')
-    response = requests.get('https://ais.usvisa-info.com/es-ar/niv/schedule/38923059/appointment/days/28.json?appointments\\[expedite\\]=false', cookies=cookies, headers=headers)
+    response = requests.get('https://ais.usvisa-info.com/es-ar/niv/schedule/49613228/appointment/days/28.json?appointments\\[expedite\\]=false', cookies=cookies, headers=headers)
     appointments = response.json()
+
+    print('-text')
+    print(response.text)
+    print('-header')
+    print(response.headers)
 
     top_five_appointments = appointments[:5]
     
@@ -59,8 +66,18 @@ while True:
         if current_appointment > datetime_obj:
             print(f'{bcolors.BOLD}{bcolors.OKCYAN}{datetime_str}{bcolors.ENDC}')
             found = f'{bcolors.BOLD}{bcolors.FAIL}LAST FOUND AT {now}{bcolors.ENDC}'
+            notification_url = 'https://cheddar-api.onrender.com/notification'  
+            notification_body = {
+                "message": "Fecha encontrada: "+datetime_str,
+                "pwd": "NiceTry"
+            }
+            json_data = json.dumps(notification_body)
+            notification_headers = {
+                'Content-Type': 'application/json'
+            }
+            requests.post(notification_url, data=json_data, headers=notification_headers)
         else:
             print(f'{bcolors.ENDC}{datetime_str}')
     
     print('-------------------------\n')
-    time.sleep(10)
+    time.sleep(15)
